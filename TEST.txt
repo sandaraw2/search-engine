@@ -1,0 +1,98 @@
+
+Project: Assignment 3: M3
+Team: Sandra Wang, Jin Hyuk Myung, Vickie Do
+
+Search Queries and Comments:
+
+1. "computer science"
+    Result: This query did not have enough search results and we had realized that the outcome was off due to our indexer. 
+    Fix: We had to fix our indexer that was account for the amount of files we were scraping.
+2. "master of software engineering"
+    Result: The results of the query was showing us "master" AND "of" files along with "software" AND "of" files appended together.
+    Fix: We had to change our conjunction handler to make sure it was filtering the previous sets of words before appending the next comparison.
+3. "anteater"
+    Result: There were no results.
+    Fix: We were using a Stemmer at first, but decided to not include it because it was hindering our ability to search properly.
+4. "This is another very long QUERY that might also take a very long time"
+    Result: This was anticipated to fail, but we go some results since we did not leave out any stop words.
+    Comment: There is no fix for this.
+5. "cristina lopes"
+    Result: We got this error - 
+            File "/Users/vickiedo/Desktop/IR23F-A3-G83/streamlit_app.py", line 65, in <module>
+                main()
+            File "/Users/vickiedo/Desktop/IR23F-A3-G83/streamlit_app.py", line 29, in main
+                generate_results(search_query)
+            File "/Users/vickiedo/Desktop/IR23F-A3-G83/streamlit_app.py", line 36, in generate_results
+                results_of_query = query(search_query)
+                                ^^^^^^^^^^^^^^^^^^^
+            File "/Users/vickiedo/Desktop/IR23F-A3-G83/queryhandler.py", line 48, in query
+                temp_dict[token] = character_index[token]
+    Fix: There was an error with our character_index[token] portion. Since the token did not already exists in our files, we could not open the file. 
+6. "artificial intelligence" 
+    Result: Large number of search results as AI is a common topic. 
+    Comment: No issues.
+7. "python coding" 
+    Result: Searching for: python coding
+            Elapsed Time: 0.64 seconds
+    Comment: There are good results and the result time is decent.
+8. "best computer science schools" 
+    Result: Too many results not directly related.
+9. "ICS honor program" 
+    Result: There are relevant search results, but the words are not tied together. 
+    Fix: We fixed the position detection for better ranking.
+10. "data structures and algorithms in C" 
+    Result: KeyError: 'C'
+    Comment: We omitted shorter than 2 characters to refine our index postings list.
+11. "self driving car research papers" 
+    Result: https://aiclub.ics.uci.edu/ 
+    Comment: This website has been showing up often. The text file in the DEV directory. 
+12. "internship opportunities summer 2025" 
+    Result: TypeError: 'NoneType' object is not subscriptable
+13. "distributed systems design" 
+    Result: KeyError: 'distributed'
+    Comment: There is some discrepancy with detecting certain tokens. 
+14. "animation" 
+    Result: There are some links that do not work, but the word animation appears in the DEV folder.  
+    Fix: Check whether there is none or little info and remove the links. 
+15. "javascript database sql" 
+    Result: There are no results.
+16. "i want to check the attendance of students" 
+    Result: There are no results
+17. "jacket" 
+    Result: Searching for: jacket
+            Elapsed Time: 0.08 seconds
+
+            Search Results:
+
+            https://evoke.ics.uci.edu/values-in-design-fellows-honored-at-iconference-2013/
+            http://sli.ics.uci.edu/pmwiki/pmwiki.php?n=AIStats%2FPostings
+            https://www.ics.uci.edu/~eppstein/pix/prague/marionety/GreenJacket.html
+            https://www.ics.uci.edu/~eppstein/pix/mass/cambridge/OrangeJacket.html
+            https://www.ics.uci.edu/~eppstein/pix/paris/SandorFisheye.html
+18. "becoming a professor" 
+    Result:Searching for: becoming a professor
+        Elapsed Time: 0.6 seconds
+19. "ACM" 
+    Result: ACM had a key error.
+    Fix: We did not make the query string lower case, so we added that and now the result is: 
+        Searching for: acm
+
+        Elapsed Time: 0.73 seconds
+
+        Search Results:
+
+        http://asterix.ics.uci.edu/fuzzyjoin/
+        https://chenli.ics.uci.edu/publications/
+        http://cloudberry.ics.uci.edu/we-have-a-new-youtube-video/
+        http://cloudberry.ics.uci.edu/sadeem-alsudais-qiushi-bai-and-prof-chen-li-gave-a-tutorial-presentation-at-boss-2019-workshop-in-los-angeles-about-cloudberry-big-data-visualization/
+        .... and more.
+20. "machine learning" 
+    Result: Searching for: machine learning
+            Elapsed Time: 0.8 seconds
+            https://ngs.ics.uci.edu/tag/computer-vision-multimedia/
+            https://ngs.ics.uci.edu/machine-learning-hammer/
+            https://ngs.ics.uci.edu/category/experiential-computing/page/9/
+            https://ngs.ics.uci.edu/author/ramesh/page/19/
+            https://ngs.ics.uci.edu/blog/page/19/
+            http://sdcl.ics.uci.edu/research/chatbots/
+            .... and more.
